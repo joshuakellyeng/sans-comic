@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoText from '../../assets/cs-logo-white.png'
-import logo from '../../assets/cs-logo-white.svg'
+import logoText from '../../assets/cs-text-white.png'
+import logo from '../../assets/cs-logo-white.png'
 
 
 const NavBar = () => {
@@ -10,13 +10,13 @@ const NavBar = () => {
 			<div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
 				<div className="flex-shrink-0 flex items-center">
 					<Link to="/">
-						<img
-							className="block lg:hidden h-8 w-auto"
+						{/* <img
+							className="block lg:hidden h-14 w-auto"
 							src={logo}
 							alt="The Cobalt Soul"
-						/>
+						/> */}
 						<img
-							className="hidden lg:block h-8 w-auto"
+							className=" h-16 w-auto"
 							src={logoText}
 							alt="The Cobalt Soul"
 						/>
@@ -24,6 +24,7 @@ const NavBar = () => {
 				</div>
 			</div>
 			<div className="px-2 mx-2">
+				{/* Links to Different Pages Container*/}
 				<div className="items-stretch hidden lg:flex">
 					<Link to="promos" className="btn btn-ghost btn-sm rounded-btn">
 						Latest Releases

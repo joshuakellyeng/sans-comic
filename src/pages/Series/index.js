@@ -3,7 +3,7 @@ import SideBar from '../../components/SideBar'
 
 const Series = () => {
     return (
-        <div>
+        <div className="h-screen">
             <SideBar />
         </div>
     );
