@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoText from '../../assets/cs-logo-black.svg'
-import logo from '../../assets/cs-logo-black.svg'
+import logoText from '../../assets/cs-logo-white.png'
+import logo from '../../assets/cs-logo-white.svg'
 
 
 const NavBar = () => {

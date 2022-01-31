@@ -2,7 +2,7 @@ import React from 'react';
 
 const Card = () => {
 	return (
-		<div className="card card-bordered mx-1 my-1">
+		<div className="card card-bordered mx-1 my-1 w-1/4">
 			<figure>
 				<img src="https://picsum.photos/id/1005/400/250" />
 			</figure>
