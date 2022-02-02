@@ -3,7 +3,7 @@ import React from 'react';
 
 const CartCard = () => {
 	return (
-		<div className="card lg:card-side card-bordered my-2 mx-2">
+		<div className="card shadow rounded-none lg:card-side my-2 mx-2">
 			<figure>
 				<img src="https://picsum.photos/id/1005/400/250" />
 			</figure>

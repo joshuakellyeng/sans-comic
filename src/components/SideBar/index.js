@@ -5,7 +5,7 @@ const SideBar = () => {
 		<div className="rounded-lg shadow bg-base-200 drawer h-screen">
 			<input id="my-drawer" type="checkbox" className="drawer-toggle" />
 			<div className="flex flex-col items-center justify-center drawer-content">
-				<label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+				<label htmlFor="my-drawer" className="btn btn-primary rounded-none drawer-button">
 					open menu
 				</label>
 			</div>

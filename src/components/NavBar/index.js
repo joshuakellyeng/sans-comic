@@ -4,19 +4,20 @@ import logoText from '../../assets/cs-text-white.png'
 import logo from '../../assets/cs-logo-white.png'
 
 
+
 const NavBar = () => {
 	return (
-		<div className="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded">
+		<div className="navbar mb-2 shadow-lg bg-neutral-focus text-neutral-content rounded-none">
 			<div className="flex-1 flex items-center sm:items-stretch sm:justify-start">
 				<div className="flex-shrink-0 flex items-center">
 					<Link to="/">
-						{/* <img
+						<img
 							className="block lg:hidden h-14 w-auto"
 							src={logo}
 							alt="The Cobalt Soul"
-						/> */}
+						/>
 						<img
-							className=" h-16 w-auto"
+							className="hidden lg:block h-16 w-auto"
 							src={logoText}
 							alt="The Cobalt Soul"
 						/>
@@ -26,19 +27,19 @@ const NavBar = () => {
 			<div className="px-2 mx-2">
 				{/* Links to Different Pages Container*/}
 				<div className="items-stretch hidden lg:flex">
-					<Link to="promos" className="btn btn-ghost btn-sm rounded-btn">
+					<Link to="promos" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
 						Latest Releases
 					</Link>
-					<Link to="series" className="btn btn-ghost btn-sm rounded-btn">
+					<Link to="series" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
 						Series
 					</Link>
-					<Link to="contact" className="btn btn-ghost btn-sm rounded-btn">
+					<Link to="contact" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
 						Contact
 					</Link>
 				</div>
 			</div>
 			<div className="flex-none">
-				<Link to="checkout" className="btn btn-square btn-ghost">
+				<Link to="checkout" className="btn btn-square btn-ghost rounded-none hover:bg-neutral">
 					<svg
 						className="w-6 h-6"
 						fill="none"

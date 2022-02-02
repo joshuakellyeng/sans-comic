@@ -3,7 +3,7 @@ import Hero from '../../components/Hero'
 
 const Home = () => {
     return (
-        <div className="h-screen">
+        <div>
            <Hero />
         </div>
     );
