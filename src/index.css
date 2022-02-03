@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-/* .bg-img{
-    background-image: url('https://picsum.photos/id/1005/600/600');
-    filter: blur(20px);
-} */
+.bg-img{
+    background-image: url('');
+}

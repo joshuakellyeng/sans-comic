@@ -8,11 +8,11 @@ const Promos = () => {
     
 	const [promoComics, setPromoComics] = useState([]);
 
-
+	// https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c
 	// https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c
 	const fetchComics = async () => {
 		try {
-			const res = await axios.get('https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c');
+			const res = await axios.get('https://gateway.marvel.com/v1/public/comics?format=comic&orderBy=title&limit=40&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c');
 			setPromoComics(res.data.data.results);
 			console.log(promoComics)
 		} catch (error) {

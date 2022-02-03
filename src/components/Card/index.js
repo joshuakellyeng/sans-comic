@@ -2,23 +2,31 @@ import React from 'react';
 import cleanjpg from '../../assets/clean.jpg'
 
 const Card = ({comic}) => {
-	// console.log(comic)
+	console.log(comic)
 	let renderImg = comic.images[0]?.path + '.'+ comic.images[0]?.extension
 	
 	let forSale = comic.prices[0].price
 	/* Conditional rendering brought to you by Carmen */
 	return (
-		<div className="card rounded-none text-center shadow mx-1 my-1 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-full">
+		<div className="card rounded-none  text-center shadow mx-1 my-1 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-full">
 			<figure>
 				{/* Conditional rendering brought to you by Carmen */}
-				<img src={ (renderImg != "undefined.undefined" ) ? renderImg : cleanjpg }/>
+				<img src={ (renderImg !== "undefined.undefined" ) ? renderImg : cleanjpg }/>
 			</figure>
 			<div className="card-body justify-between">
 				<h2 className="card-title">
 					{comic.title}
-					<div className="badge mx-2 badge-primary">NEW</div>
-					{/* Carmen showed me conditional rendering */}
-					<div className="badge mx-2 badge-primary">Price: {comic.prices[0].price ? comic.prices[0].price : 'Sold Out'}</div>
+					{/* conditional rendering for the badge */}
+					{(forSale > "0")?
+					<div className="badge mx-2 badge-primary">NEW</div>:
+					<div className="badge mx-2 badge-secondary rounded-none">Sold Out</div>
+					}
+					{/* Carmen showed me conditional rendering for the price */}
+
+					{(forSale > "0")?
+					<div className="badge mx-2 badge-primary">Price: { forSale }</div>:
+					<div className=" hidden badge mx-2 badge-primary"> Price: { forSale }</div>
+					}
 				</h2>
 				<p className='overflow-auto max-h-40'>{comic.textObjects[0]?.text ? comic.textObjects[0]?.text  : "Coming Soon!" }
 				</p>
