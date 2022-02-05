@@ -22,7 +22,7 @@ const Card = ({comic}) => {
 					<div className="badge mx-2 badge-secondary rounded-none">Sold Out</div>
 					}
 					{/* Carmen showed me conditional rendering for the price */}
-
+					<br />
 					{(forSale > "0")?
 					<div className="badge mx-2 badge-primary">Price: { forSale }</div>:
 					<div className=" hidden badge mx-2 badge-primary"> Price: { forSale }</div>
