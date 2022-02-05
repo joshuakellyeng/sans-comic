@@ -2,7 +2,7 @@ import React from 'react';
 import cleanjpg from '../../assets/clean.jpg'
 
 const Card = ({comic}) => {
-	console.log(comic)
+
 	let renderImg = comic.images[0]?.path + '.'+ comic.images[0]?.extension
 	
 	let forSale = comic.prices[0].price

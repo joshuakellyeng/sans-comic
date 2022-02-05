@@ -1,10 +1,10 @@
 import React from 'react';
 import Hero from '../../components/Hero'
 
-const Home = () => {
+const Home = ( { promoComics } ) => {
     return (
         <div>
-           <Hero />
+           <Hero promoComics={promoComics} />
         </div>
     );
 }

@@ -1,11 +1,24 @@
 import React from 'react';
 
-const Hero = () => {
+const Hero = ({promoComics}) => {
+
+	
+
+	//this variable will allow us to select a random comic from our array and display it as our hero title upon load
+	let randomPromo = Math.floor(Math.random() * 101)
+
+	let currentPromo = promoComics[randomPromo]
+
+	// let renderImg = promoComics.images[0]?.path + '.'+ promoComics.images[0]?.extension
+	// let forSale = promoComics.prices[0].price
+
+	console.log(currentPromo)
+
 	return (
 			<div className="hero min-h-screen shadow bg-img">
 				<div className="flex-col hero-content lg:flex-row-reverse bg-stone-50 z-[100]">
 					<img
-						src="https://picsum.photos/id/1005/600/600"
+						src='#'
 						className="max-w-sm rounded-none shadow-2xl"
 					/>
 					<div>
