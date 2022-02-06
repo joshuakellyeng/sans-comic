@@ -20,6 +20,8 @@ const App = () => {
 
 	// https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c
 	// https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c
+
+	//initial fetch request with array of 100 comics
 	const fetchComics = async () => {
 		try {
 			const res = await axios.get(
@@ -31,22 +33,59 @@ const App = () => {
 		}
 	};
 
+	//handleAddToCart function
+
+	const handleAddToCart = (comic) => {
+		const exist = cartItems.find((item) => item.id === comic.id);
+		if (exist) {
+			setCartItems(
+				cartItems.map((item) =>
+					item.id === comic.id ? { ...exist, qty: exist.qty + 1 } : item
+				)
+			);
+		} else {
+			setCartItems([...cartItems, { ...comic, qty: 1 }]);
+		}
+	};
+
+	const handleRemoveFromCart = (comic) => {
+		const exist = cartItems.find((item) => item.id === comic.id);
+		if (exist.qty === 1) {
+			setCartItems(cartItems.filter((item) => item.id !== comic.id));
+		} else {
+			setCartItems(
+				cartItems.map((item) =>
+					item.id === comic.id ? { ...exist, qty: exist.qty - 1 } : item
+				)
+			);
+		}
+	};
+
 	useEffect(() => {
 		fetchComics();
 	}, []);
 
-	
 	return (
 		<div>
 			<NavBar />
 			<Routes>
 				<Route path="/" element={<Home promoComics={promoComics} />} />
-				<Route path="promos" element={<Promos promoComics={promoComics} />} />
+				<Route
+					path="promos"
+					element={
+						<Promos
+							promoComics={promoComics}
+							handleAddToCart={handleAddToCart}
+						/>
+					}
+				/>
 				<Route path="series" element={<Series />} />
 				<Route path="contact" element={<Contact />} />
 				<Route
 					path="checkout"
-					element={<Checkout promoComics={promoComics} />}
+					element={
+						<Checkout handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} cartItems={cartItems} />
+					}
 				/>
 			</Routes>
 			<Footer />

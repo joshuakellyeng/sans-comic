@@ -14,7 +14,7 @@ const Hero = ({ promoComics }) => {
 	return (
 		<div className="hero min-h-screen shadow bg-img">
 			<div className="flex-col hero-content rounded lg:flex-row-reverse bg-stone-50 z-[100]">
-				<img src={renderImg} className="max-w-sm rounded-none shadow-2xl" />
+				<img src={renderImg} className="max-w-sm rounded-none shadow-2xl" alt={currentPromo?.title} />
 				<div>
 					<h1 className="mb-5 text-5xl font-bold">{currentPromo?.title}</h1>
 					<p className="mb-5">
