@@ -1,39 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Hero = ({promoComics}) => {
-
-	
-
+const Hero = ({ promoComics }) => {
 	//this variable will allow us to select a random comic from our array and display it as our hero title upon load
-	let randomPromo = Math.floor(Math.random() * 101)
+	let randomPromo = Math.floor(Math.random() * (promoComics.length + 1));
+	//this how we will store the value and display the chosen comic
+	let currentPromo = promoComics[randomPromo];
 
-	let currentPromo = promoComics[randomPromo]
-
-	// let renderImg = promoComics.images[0]?.path + '.'+ promoComics.images[0]?.extension
-	// let forSale = promoComics.prices[0].price
-
-	console.log(currentPromo)
+	//Marvel API breaks up its image links so I'll be using string interpolation and optional chaining to get the image to display similar to the Card component
+	let renderImg =
+		currentPromo?.images[0].path + '.' + currentPromo?.images[0].extension;
 
 	return (
-			<div className="hero min-h-screen shadow bg-img">
-				<div className="flex-col hero-content lg:flex-row-reverse bg-stone-50 z-[100]">
-					<img
-						src='#'
-						className="max-w-sm rounded-none shadow-2xl"
-					/>
-					<div>
-						<h1 className="mb-5 text-5xl font-bold">Promo Title</h1>
-						<p className="mb-5">
-							Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-							excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-							et a id nisi.
-						</p>
-						<button className="btn btn-primary rounded-none">
-							Get Started
-						</button>
-					</div>
+		<div className="hero min-h-screen shadow bg-img">
+			<div className="flex-col hero-content rounded lg:flex-row-reverse bg-stone-50 z-[100]">
+				<img src={renderImg} className="max-w-sm rounded-none shadow-2xl" />
+				<div>
+					<h1 className="mb-5 text-5xl font-bold">{currentPromo?.title}</h1>
+					<p className="mb-5">
+						Learn more about {currentPromo?.series.name} Series below!
+					</p>
+					<button className="btn btn-primary rounded-none">
+						<Link to="/promos">Click Here</Link>
+					</button>
 				</div>
 			</div>
+		</div>
 	);
 };
 

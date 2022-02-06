@@ -28,7 +28,7 @@ const NavBar = () => {
 				{/* Links to Different Pages Container*/}
 				<div className="items-stretch hidden lg:flex">
 					<Link to="promos" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
-						Latest Releases
+						Pre-Order
 					</Link>
 					<Link to="series" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
 						Series
