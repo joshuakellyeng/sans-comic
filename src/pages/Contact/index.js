@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Contact = () => {
+	
 	return (
 		<div className="h-screen flex flex-col justify-center">
 			<form className="max-w-lg w-full m-auto">

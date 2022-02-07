@@ -12,9 +12,13 @@ import Checkout from './pages/Checkout';
 import Contact from './pages/Contact';
 
 const App = () => {
+	//sets comics array
 	const [promoComics, setPromoComics] = useState([]);
-
+	//sets state cart items
 	const [cartItems, setCartItems] = useState([]);
+	//sets loading state
+	const [loading, setLoading] = useState(false)
+	
 	//list of promo articles
 	// https://comicvine.gamespot.com/api/promos/?&filter=api_key=4f8f8990ab1697df27672bcbdf1d0da1b794916b&format=json
 
@@ -84,7 +88,7 @@ const App = () => {
 				<Route
 					path="checkout"
 					element={
-						<Checkout handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} cartItems={cartItems} />
+						<Checkout setCartItems={setCartItems} handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} cartItems={cartItems} />
 					}
 				/>
 			</Routes>

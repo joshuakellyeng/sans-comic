@@ -21,7 +21,7 @@ const Hero = ({ promoComics }) => {
 						Learn more about {currentPromo?.series.name} Series below!
 					</p>
 					<button className="btn btn-primary rounded-none">
-						<Link to="/promos">Click Here</Link>
+						<Link to="/promos">Click Here For More !</Link>
 					</button>
 				</div>
 			</div>
