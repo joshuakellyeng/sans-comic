@@ -58,7 +58,7 @@ const NavBar = ({countCartItems}) => {
 					 {''}
 					{
 						countCartItems ? (
-							<button className='badge mx-2 badge-primary'>{countCartItems}</button>
+							<button className='badge mx-2 badge-primary'><strong>{countCartItems}</strong></button>
 						) : ('')
 					}
 					</Link>
