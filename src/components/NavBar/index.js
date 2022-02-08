@@ -26,7 +26,7 @@ const NavBar = ({countCartItems}) => {
 			</div>
 			<div className="px-2 mx-2">
 				{/* Links to Different Pages Container*/}
-				<div className="items-stretch hidden lg:flex">
+				<div className="items-stretch lg:flex ">
 					<Link to="promos" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
 						Pre-Order
 					</Link>
