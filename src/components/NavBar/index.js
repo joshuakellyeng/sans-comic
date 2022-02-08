@@ -7,7 +7,7 @@ import logo from '../../assets/cs-logo-white.png'
 
 const NavBar = ({countCartItems}) => {
 	return (
-		<div id='nav' className="navbar mb-2 shadow-lg bg-neutral-focus text-neutral-content rounded-none sticky top-0 z-[1]">
+		<div id='nav' className="navbar mb-2 shadow-lg bg-neutral-focus text-neutral-content rounded-none sticky top-0 z-[100]">
 			<div className="flex-1 flex items-center sm:items-stretch sm:justify-start ">
 				<div className="flex-shrink-0 flex items-center">
 					<Link to="/">

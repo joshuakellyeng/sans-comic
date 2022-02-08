@@ -5,6 +5,8 @@ const Contact = () => {
 	return (
 		<div className="h-screen flex flex-col justify-center">
 			<form className="max-w-lg w-full m-auto">
+							<h1 className='text-7xl py-5 mx-auto text-center' >Contact Us</h1>
+							<h1 className='text-2xl py-5 mx-auto text-center' >For any questions about your purchase, or the availability of select titles.</h1>
 				<div className="flex flex-wrap -mx-3 mb-6">
 					<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 						<label
