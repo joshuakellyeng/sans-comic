@@ -71,7 +71,7 @@ const App = () => {
 
 	return (
 		<div>
-			<NavBar />
+			<NavBar countCartItems={cartItems.length}/>
 			<Routes>
 				<Route path="/" element={<Home promoComics={promoComics} />} />
 				<Route
