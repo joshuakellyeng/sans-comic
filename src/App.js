@@ -70,7 +70,7 @@ const App = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className='app-container'>
 			<NavBar countCartItems={cartItems.length}/>
 			<Routes>
 				<Route path="/" element={<Home promoComics={promoComics} />} />

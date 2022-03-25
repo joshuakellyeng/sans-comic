@@ -4,7 +4,7 @@ import Card from '../../components/Card';
 const Promos = ({ promoComics, handleAddToCart }) => {
 	
 	return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col items-center pb-20">
 			<h1 className="m-4 lg:text-6xl sm:text-2xl font-black">
 				Pre-Order Upcoming Releases
 			</h1>
