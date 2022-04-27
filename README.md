@@ -1,10 +1,10 @@
 
-# The Cobalt Soul eComicbook Shop
+#The Cobalt Soul eComicbook Shop
 
 ###E-Commerce shop for Digital, and Physical Comics and Graphic Novels
 
 <hr>
-## Demo
+##Demo
 
 <ul>
 <li>The wireframe for this project is available on <a href='https://www.figma.com/file/Rott5ft7r1k1z0TWFtLN6A/The-Cobalt-Soul-eCommerce?node-id=5%3A94'>Figma</a> showing how I went about the design of my site along with individual components.</li>
