@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Checkout = ({ setCartItems, cartItems, handleAddToCart, handleRemoveFromCart }) => {
+const Checkout = ({
+	setCartItems,
+	cartItems,
+	handleAddToCart,
+	handleRemoveFromCart,
+}) => {
 	const itemsPrice = cartItems.reduce(
 		(a, c) => a + c.prices[0].price * c.qty,
 		0
@@ -14,22 +19,24 @@ const Checkout = ({ setCartItems, cartItems, handleAddToCart, handleRemoveFromCa
 			`Thank you for Shopping at The Cobalt Soul! Your Total is $${totalPrice.toFixed(
 				2
 			)} dollars.`
-		)
-		setCartItems([])
-	}
+		);
+		setCartItems([]);
+	};
 
 	return (
 		<div>
-			<div id='checkout' className="flex">
+			<div id="checkout" className="flex">
 				<div className="card-container grow">
 					<div>{cartItems === 0 && <div>Cart is Empty</div>}</div>
 					{cartItems.map((comic) => (
-						<div id='checkout-card'
+						<div
+							id="checkout-card"
 							key={comic.id}
 							className="card shadow rounded-none lg:card-side my-2 mx-2"
 						>
 							<figure>
-								<img id='checkout-img'
+								<img
+									id="checkout-img"
 									src={comic.images[0].path + '.' + comic.images[0].extension}
 									alt={comic.title}
 								/>
@@ -79,30 +86,30 @@ const Checkout = ({ setCartItems, cartItems, handleAddToCart, handleRemoveFromCa
 										<p>Items Price</p>
 										<p>$ {itemsPrice.toFixed(2)}</p>
 									</div>
-								
-								<div className="flex justify-between w-full">
-									<p>Tax</p>
-									<p>$ {taxPrice.toFixed(2)}</p>
+
+									<div className="flex justify-between w-full">
+										<p>Tax</p>
+										<p>$ {taxPrice.toFixed(2)}</p>
+									</div>
+									<div className="flex justify-between w-full">
+										<p>Shipping</p>
+										<p>$ {shippingPrice.toFixed(2)}</p>
+									</div>
 								</div>
-								<div className="flex justify-between w-full">
-									<p>Shipping</p>
-									<p>$ {shippingPrice.toFixed(2)}</p>
+								<hr />
+								<div className="flex justify-between w-full font-bold">
+									<p>Total</p>
+									<p>$ {totalPrice.toFixed(2)}</p>
 								</div>
-							</div>
-							<hr />
-							<div className="flex justify-between w-full font-bold">
-								<p>Total</p>
-								<p>$ {totalPrice.toFixed(2)}</p>
-							</div>
-							<hr />
-							<div className="row">
-								<button
-									className="btn btn-primary rounded-none w-full"
-									onClick={handleCheckout}
-								>
-									CheckOut
-								</button>
-							</div>
+								<hr />
+								<div className="row">
+									<button
+										className="btn btn-primary rounded-none w-full margin-bottom-100"
+										onClick={handleCheckout}
+									>
+										CheckOut
+									</button>
+								</div>
 							</div>
 						</>
 					)}
