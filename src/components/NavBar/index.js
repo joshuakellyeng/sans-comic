@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoText from '../../assets/cs-text-white.png';
+import logoText from '../../assets/sans-comic-logo.png';
 import logo from '../../assets/cs-logo-white.png';
 
 const NavBar = ({ countCartItems }) => {

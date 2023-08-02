@@ -17,8 +17,8 @@ const App = () => {
 	//sets state cart items
 	const [cartItems, setCartItems] = useState([]);
 	//sets loading state
-	const [loading, setLoading] = useState(false)
-	
+	const [loading, setLoading] = useState(false);
+
 	//list of promo articles
 	// https://comicvine.gamespot.com/api/promos/?&filter=api_key=4f8f8990ab1697df27672bcbdf1d0da1b794916b&format=json
 
@@ -29,7 +29,7 @@ const App = () => {
 	const fetchComics = async () => {
 		try {
 			const res = await axios.get(
-				'https://gateway.marvel.com/v1/public/comics?format=comic&startYear=2022&orderBy=onsaleDate&limit=100ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c'
+				'https://gateway.marvel.com/v1/public/comics?format=comic&startYear=2023&orderBy=onsaleDate&limit=36ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c'
 			);
 			setPromoComics(res.data.data.results);
 		} catch (error) {
@@ -70,8 +70,8 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className='app-container'>
-			<NavBar countCartItems={cartItems.length}/>
+		<div className="app-container">
+			<NavBar countCartItems={cartItems.length} />
 			<Routes>
 				<Route path="/" element={<Home promoComics={promoComics} />} />
 				<Route
@@ -88,7 +88,12 @@ const App = () => {
 				<Route
 					path="checkout"
 					element={
-						<Checkout setCartItems={setCartItems} handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} cartItems={cartItems} />
+						<Checkout
+							setCartItems={setCartItems}
+							handleRemoveFromCart={handleRemoveFromCart}
+							handleAddToCart={handleAddToCart}
+							cartItems={cartItems}
+						/>
 					}
 				/>
 			</Routes>
