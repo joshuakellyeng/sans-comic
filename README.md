@@ -15,7 +15,4 @@ An e-commerce web application that allows customers to purchase digital comics a
 ### Functionality
 
 - Allows customers to pre-order comics before release
-
-### Features
-
 - Responsive Web Design
