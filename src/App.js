@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import { MAX_QUANTITY_PER_ITEM } from './constants';
+
 //components
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 //pages
 import Home from './pages/Home';
-import Promos from './pages/Promos';
-import Series from './pages/Series';
+import Comics from './pages/Comics';
 import Checkout from './pages/Checkout';
-import Contact from './pages/Contact';
+import NotFound from './components/NotFound';
 
 const App = () => {
 	//sets comics array
@@ -26,14 +27,26 @@ const App = () => {
 	// https://gateway.marvel.com/v1/public/comics?format=comic&ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c
 
 	//initial fetch request with array of 100 comics
+	// const fetchComics = async () => {
+	// 	try {
+	// 		const res = await axios.get(
+	// 			'https://gateway.marvel.com/v1/public/comics?format=comic&startYear=2023&orderBy=onsaleDate&limit=36ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c'
+	// 		);
+	// 		setPromoComics(res.data.data.results);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 	const fetchComics = async () => {
 		try {
 			const res = await axios.get(
 				'https://gateway.marvel.com/v1/public/comics?format=comic&startYear=2023&orderBy=onsaleDate&limit=36ts=1&apikey=04603fbf10ade1cc429c24fab83e0fed&hash=e0a2115671c5bf517f6cbab3297a726c'
 			);
 			setPromoComics(res.data.data.results);
+			setLoading(false); // Set loading to false when data is fetched
 		} catch (error) {
 			console.log(error);
+			setLoading(false); // Set loading to false even if an error occurs
 		}
 	};
 
@@ -41,12 +54,15 @@ const App = () => {
 
 	const handleAddToCart = (comic) => {
 		const exist = cartItems.find((item) => item.id === comic.id);
+
 		if (exist) {
-			setCartItems(
-				cartItems.map((item) =>
-					item.id === comic.id ? { ...exist, qty: exist.qty + 1 } : item
-				)
-			);
+			if (exist.qty < MAX_QUANTITY_PER_ITEM) {
+				setCartItems(
+					cartItems.map((item) =>
+						item.id === comic.id ? { ...exist, qty: exist.qty + 1 } : item
+					)
+				);
+			}
 		} else {
 			setCartItems([...cartItems, { ...comic, qty: 1 }]);
 		}
@@ -70,21 +86,22 @@ const App = () => {
 	}, []);
 
 	return (
-		<div className="app-container">
-			<NavBar countCartItems={cartItems.length} />
+		<div className="sansAppContainer">
+			<NavBar
+				countCartItems={cartItems.reduce((total, item) => total + item.qty, 0)}
+			/>
 			<Routes>
 				<Route path="/" element={<Home promoComics={promoComics} />} />
 				<Route
-					path="promos"
+					path="comics"
 					element={
-						<Promos
+						<Comics
 							promoComics={promoComics}
+							cartItems={cartItems}
 							handleAddToCart={handleAddToCart}
 						/>
 					}
 				/>
-				<Route path="series" element={<Series />} />
-				<Route path="contact" element={<Contact />} />
 				<Route
 					path="checkout"
 					element={
@@ -96,6 +113,7 @@ const App = () => {
 						/>
 					}
 				/>
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 			<Footer />
 		</div>

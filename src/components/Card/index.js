@@ -1,59 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cleanjpg from '../../assets/clean.jpg';
+import '../../index.css';
+import { MAX_QUANTITY_PER_ITEM } from '../../constants';
 
-const Card = ({ comic, handleAddToCart }) => {
+const Card = ({ comic, cartItems, handleAddToCart }) => {
+	const [addedCount, setAddedCount] = useState(0);
 	let renderImg = comic.images[0]?.path + '.' + comic.images[0]?.extension;
 
-	let forSale = comic.prices[0].price;
-	/* Conditional rendering brought to you by Carmen */
+	let forSale = String(comic.prices[0].price);
+	const [integerPart, decimalPart] = forSale.split('.');
+
+	const cartItem = cartItems.find((item) => item.id === comic.id);
+	const cartItemQty = cartItem ? cartItem.qty : 0;
+
+	const handleBuyButtonClick = () => {
+		if (cartItemQty < MAX_QUANTITY_PER_ITEM) {
+			handleAddToCart(comic);
+			setAddedCount(cartItemQty + 1);
+		}
+	};
+
 	return (
-		<div className="card rounded-none  text-center shadow mx-1 my-1 xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-full">
+		<div className="sansCard">
 			<figure>
-				{/* Conditional rendering brought to you by Carmen */}
 				<img
 					src={renderImg !== 'undefined.undefined' ? renderImg : cleanjpg}
 					alt={comic.title}
+					className="sansImage"
 				/>
 			</figure>
-			<div className="card-body justify-between">
-				<h2 className="card-title">
-					{comic.title}
-					{/* conditional rendering for the badge */}
-					{forSale > '0' ? (
-						<div className="badge mx-2 badge-primary">NEW</div>
-					) : (
-						<div className="badge mx-2 badge-secondary rounded-none">
-							Sold Out
-						</div>
-					)}
-					{/* Carmen showed me conditional rendering for the price */}
-					<br />
-					{forSale > '0' ? (
-						<div className="badge mx-2 badge-primary">Price: {forSale}</div>
-					) : (
-						<div className=" hidden badge mx-2 badge-primary">
-							{' '}
-							Price: {forSale}
-						</div>
-					)}
-				</h2>
-				<p className="overflow-auto max-h-40">
-					{comic.textObjects[0]?.text
-						? comic.textObjects[0]?.text
-						: 'Coming Soon!'}
-				</p>
-				<div className="justify-end card-actions">
-					{forSale > '0' ? (
-						<button
-							onClick={() => handleAddToCart(comic)}
-							className="btn rounded-none"
-						>
-							Add to Cart
-						</button>
-					) : (
-						<button className="btn btn-disabled rounded-none">Sold Out</button>
-					)}
+			<div className="sansDetailsBackground"></div>
+			<h2 className="sansTitle">
+				{comic.title}
+				{forSale > '0' ? (
+					<div className="badge mx-2 badge-primary positionAbsolute displayNone">
+						NEW
+					</div>
+				) : (
+					<div className="badge mx-2 badge-secondary rounded-none positionAbsolute displayNone">
+						Sold Out
+					</div>
+				)}
+			</h2>
+			{forSale > '0' ? (
+				<div className="sansPriceContainer">
+					<div className="badge mx-2 sansPrice">
+						<span className="sansDollarSign">$</span>
+						<span className="sansPriceInteger">{integerPart}</span>
+						<span className="sansPriceDecimal">{decimalPart}</span>
+					</div>
+					<div className="badge mx-2 sansPrice priceOffset"></div>
 				</div>
+			) : (
+				<div className="sansPriceContainer">
+					<div className="badge mx-2 sansPrice">
+						<span className="sansDollarSign">$</span>
+						<span className="sansPriceInteger">{integerPart}</span>
+						<span className="sansPriceDecimal">{decimalPart}</span>
+					</div>
+					<div className="badge mx-2 sansPrice priceOffset"></div>
+				</div>
+			)}
+			<div className="justify-end card-actions sansActionContainer">
+				<span className="sansAddedToCartLabel">
+					{addedCount === 0 ? '' : `+${addedCount}`}
+				</span>
+				{forSale > '0' ? (
+					<button
+						onClick={handleBuyButtonClick}
+						className="sansAddToCart"
+						disabled={cartItems.some(
+							(item) =>
+								item.id === comic.id && item.qty >= MAX_QUANTITY_PER_ITEM
+						)}
+					>
+						{addedCount >= MAX_QUANTITY_PER_ITEM ||
+						cartItems.some(
+							(item) =>
+								item.id === comic.id && item.qty >= MAX_QUANTITY_PER_ITEM
+						) ? (
+							<span>max!</span>
+						) : (
+							<span>buy!</span>
+						)}
+					</button>
+				) : (
+					<button
+						className="btn btn-disabled rounded-none sansAddToCart"
+						disabled
+					>
+						Sold Out
+					</button>
+				)}
 			</div>
 		</div>
 	);

@@ -1,4 +1,7 @@
 import React from 'react';
+import '../../index.css';
+import { Link } from 'react-router-dom';
+import { MAX_QUANTITY_PER_ITEM } from '../../constants';
 
 const Checkout = ({
 	setCartItems,
@@ -11,104 +14,192 @@ const Checkout = ({
 		0
 	);
 	const taxPrice = itemsPrice * 0.14;
-	const shippingPrice = itemsPrice > 20 ? 0 : 2.95;
+	const shippingPrice = itemsPrice > 40 ? 0 : 3.99;
 	const totalPrice = itemsPrice + taxPrice + shippingPrice;
+	const maxQuantity = MAX_QUANTITY_PER_ITEM;
 
 	const handleCheckout = () => {
 		alert(
-			`Thank you for Shopping at The Cobalt Soul! Your Total is $${totalPrice.toFixed(
+			`Thank you for shopping at Sans Comic! Your total is $${totalPrice.toFixed(
 				2
-			)} dollars.`
+			)}. This app is now a fun demo - we deprecated payment functionality since our client no longer sells comics online :)`
 		);
 		setCartItems([]);
 	};
 
 	return (
 		<div>
-			<div id="checkout" className="flex">
-				<div className="card-container grow">
-					<div>{cartItems === 0 && <div>Cart is Empty</div>}</div>
+			<div id="checkout" className="sansCheckoutContainer">
+				<div className="">
 					{cartItems.map((comic) => (
-						<div
-							id="checkout-card"
-							key={comic.id}
-							className="card shadow rounded-none lg:card-side my-2 mx-2"
-						>
+						<div key={comic.id} className="sansCheckoutCard">
 							<figure>
 								<img
-									id="checkout-img"
 									src={comic.images[0].path + '.' + comic.images[0].extension}
 									alt={comic.title}
+									className="sansCheckoutImage"
 								/>
 							</figure>
-							<div className="card-body items-baseline self-center">
-								<h2 className="card-title">{comic.title}</h2>
+							<div className="sansCheckoutDetailsContainer">
+								<h2 className="sansCheckoutTitle">{comic.title}</h2>
+								<div className="sansCheckoutTotal">
+									{(() => {
+										const total = comic.qty * comic.prices[0].price;
+										const totalString = total.toFixed(2);
+										const [integerPart, decimalPart] = totalString.split('.');
 
-								<p className="overflow-auto max-h-40">
-									{comic.textObjects[0]?.text
-										? comic.textObjects[0]?.text
-										: 'Coming Soon!'}
-								</p>
-								<p>Price: {comic.prices[0].price}</p>
-
-								<p>Qty: {comic.qty} </p>
-
-								<div className="card-actions">
+										return (
+											<>
+												<span className="sansCheckoutDollarSign">$</span>
+												<div className="sansCheckoutIntegerContainer">
+													<p
+														className={`sansCheckoutInteger ${
+															integerPart.length >= 3 ? 'sansThreeDigits' : ''
+														}`}
+													>
+														{integerPart}
+													</p>
+												</div>
+												<span
+													className={`sansCheckoutDecimal ${
+														integerPart.length === 1
+															? 'sansOneDigitDecimal'
+															: ''
+													}`}
+												>
+													{decimalPart}
+												</span>
+											</>
+										);
+									})()}
+								</div>
+								<p className="sansCheckoutQuantity">{comic.qty}</p>
+								<div className="sansCheckoutButtonContainer">
 									<button
 										onClick={() => handleAddToCart(comic)}
-										className="btn btn-secondary"
+										className="sansCheckoutButton sansPlusButton"
+										disabled={comic.qty >= maxQuantity}
 									>
-										+
+										<span className="sansCheckoutButtonText">+</span>
 									</button>
 									<button
 										onClick={() => handleRemoveFromCart(comic)}
-										className="btn btn-primary"
+										className="sansCheckoutButton sansMinusButton"
 									>
-										-
+										<span className="sansCheckoutButtonText">-</span>
 									</button>
-								</div>
-								<div className="col-2 text-right">
-									Total: $
-									{(comic.qty * comic.prices[0].price.toFixed(2)).toFixed(2)}
 								</div>
 							</div>
 						</div>
 					))}
-				</div>
-				<div className="shrink min-w-[20%] px-2 flex flex-col">
-					{cartItems.length !== 0 && (
+					{cartItems.length > 0 ? (
 						<>
-							<h1 className="text-center text-4xl">Cart</h1>
-							<hr />
-							<div>
-								<div className="flex flex-col justify-between">
-									<div className="flex justify-between w-full">
-										<p>Items Price</p>
-										<p>$ {itemsPrice.toFixed(2)}</p>
+							<div className="sansCheckoutCard sansCart">
+								<img
+									className="sansCartImage"
+									src="sans-comic-cart-active.png"
+								></img>
+								<h1 className="sansCartTitle">
+									Thank you for shopping at
+									<br />
+									<span className="sansCartStoreName">Sans Comic!</span>
+								</h1>
+								<div>
+									<div className="sansCartItemContainer">
+										<p className="sansCartLabel">
+											comics ----------{' '}
+											<span className="sansCartNumber">
+												<span className="sansCartItemDollarSign">$</span>
+												{itemsPrice.toFixed(2)}
+											</span>
+										</p>
+										<p className="sansCartLabel">
+											tax --------------{' '}
+											<span className="sansCartNumber">
+												<span className="sansCartItemDollarSign">$</span>
+												{taxPrice.toFixed(2)}
+											</span>
+										</p>
+										<p className="sansCartLabel">
+											shipping --------{' '}
+											<span className="sansCartNumber">
+												{shippingPrice === 0.0 ? (
+													<span className="sansCartShippingFree">FREE!</span>
+												) : (
+													<span>
+														<span className="sansCartItemDollarSign">$</span>
+														{shippingPrice.toFixed(2)}
+													</span>
+												)}
+											</span>
+										</p>
 									</div>
+									<p className="sansCartTotalLabel">total</p>
+									<div className="sansCartTotalContainer">
+										{(() => {
+											const totalString = totalPrice.toFixed(2);
+											const [integerPart, decimalPart] = totalString.split('.');
 
-									<div className="flex justify-between w-full">
-										<p>Tax</p>
-										<p>$ {taxPrice.toFixed(2)}</p>
+											return (
+												<p className="sansCartTotalPrice">
+													<span className="sansCartTotalDollarSign">$</span>
+													<span
+														className={`sansCartTotalInteger ${
+															integerPart.length >= 4 ? 'sansFourDigits' : ''
+														}`}
+													>
+														{integerPart}
+													</span>
+													<span
+														className={`sansCartTotalDecimal ${
+															integerPart.length >= 4
+																? 'sansFourDigitsDecimal'
+																: ''
+														}`}
+													>
+														{decimalPart}
+													</span>
+												</p>
+											);
+										})()}
 									</div>
-									<div className="flex justify-between w-full">
-										<p>Shipping</p>
-										<p>$ {shippingPrice.toFixed(2)}</p>
+									<div className="sansCartTotalContainer sansCartTotalContainerOffset"></div>
+									<div className="sansCartCheckoutButtonContainer">
+										<button
+											className="sansCartCheckoutButton"
+											onClick={handleCheckout}
+										>
+											Pay with Stripe
+										</button>
 									</div>
 								</div>
-								<hr />
-								<div className="flex justify-between w-full font-bold">
-									<p>Total</p>
-									<p>$ {totalPrice.toFixed(2)}</p>
-								</div>
-								<hr />
-								<div className="row">
-									<button
-										className="btn btn-primary rounded-none w-full margin-bottom-100"
-										onClick={handleCheckout}
-									>
-										CheckOut
-									</button>
+							</div>
+						</>
+					) : (
+						<>
+							<div className="sansCheckoutCard sansCart sansCartEmpty">
+								<img
+									className="sansCartImage"
+									src="sans-comic-cart-empty.png"
+								></img>
+								<h1 className="sansCartTitle">
+									there's nothing in your cart
+									<br />
+									<span className="sansCartStoreName">such empty :(</span>
+								</h1>
+								<div>
+									<div className="sansCartItemContainer sansCartItemSpacing">
+										<p className="sansCartLabel">
+											we have hundreds of exclusive unreleased comic books
+											across the marvel universe - spiderman, the hulk, scarlet
+											witch, and more! find your favorites by clicking below!
+										</p>
+									</div>
+									<div className="sansCartCheckoutButtonContainer">
+										<button className="sansCartCheckoutButton">
+											<Link to="/comics">Find Some Comics!</Link>
+										</button>
+									</div>
 								</div>
 							</div>
 						</>

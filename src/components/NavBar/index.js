@@ -1,26 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logoText from '../../assets/sans-comic-logo.png';
-import logo from '../../assets/sc-logo.png';
+import logo from '../../assets/sans-comic-logo-small.png';
+import '../../index.css';
 
 const NavBar = ({ countCartItems }) => {
 	return (
 		<div
 			id="nav"
-			className="navbar mb-2 shadow-lg bg-neutral-focus text-neutral-content rounded-none sticky top-0 z-[100]"
+			className="navbar shadow-lg bg-neutral-focus text-neutral-content rounded-none sticky top-0 z-[100] sansNav"
 		>
 			<div className="flex-1 flex items-center sm:items-stretch sm:justify-start ">
 				<div className="flex-shrink-0 flex items-center">
 					<Link to="/">
 						<img
-							className="block lg:hidden h-14 w-auto"
+							className="block lg:hidden h-14 w-auto sansLogo"
 							src={logo}
-							alt="The Cobalt Soul"
+							alt="Sans Comic"
 						/>
 						<img
 							className="hidden lg:block h-16 w-auto"
 							src={logoText}
-							alt="The Cobalt Soul"
+							alt="Sans Comic"
 						/>
 					</Link>
 				</div>
@@ -29,26 +30,17 @@ const NavBar = ({ countCartItems }) => {
 				{/* Links to Different Pages Container*/}
 				<div className="items-stretch lg:flex ">
 					<Link
-						to="promos"
-						className="btn btn-ghost btn-sm rounded-none hover:bg-neutral"
+						to="comics"
+						className="btn btn-ghost btn-sm rounded-none sansNavItem"
 					>
 						Comic Books
-					</Link>
-					{/* <Link to="series" className="btn btn-ghost btn-sm rounded-none hover:bg-neutral">
-						Series
-					</Link> */}
-					<Link
-						to="contact"
-						className="btn btn-ghost btn-sm rounded-none hover:bg-neutral"
-					>
-						Contact
 					</Link>
 				</div>
 			</div>
 			<div className="flex-none">
 				<Link
 					to="checkout"
-					className="btn btn-square btn-ghost rounded-none hover:bg-neutral"
+					className="btn btn-square btn-ghost rounded-none sansNavItem"
 				>
 					<svg
 						className="w-6 h-6"

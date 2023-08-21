@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../index.css';
+import spiderMan from '../../assets/spider-man.jpg';
 
 const Hero = ({ promoComics }) => {
 	//this variable will allow us to select a random comic from our array and display it as our hero title upon load
@@ -12,16 +14,33 @@ const Hero = ({ promoComics }) => {
 		currentPromo?.images[0].path + '.' + currentPromo?.images[0].extension;
 
 	return (
-		<div className="hero min-h-screen shadow bg-img">
-			<div className="flex-col hero-content rounded lg:flex-row-reverse bg-stone-50">
-				<img src={renderImg} className="max-w-sm rounded-none shadow-2xl" alt={currentPromo?.title} />
-				<div>
-					<h1 className="mb-5 text-5xl font-bold">{currentPromo?.title}</h1>
-					<p className="mb-5">
-						Learn more about {currentPromo?.series.name} Series below!
+		<div className="sansHeroContainer">
+			<div className="sansHeroCard">
+				<Link to="/comics">
+					<img
+						src={renderImg !== 'undefined.undefined' ? renderImg : spiderMan}
+						className="sansHeroImage"
+						alt={currentPromo?.title}
+					/>
+				</Link>
+				<div className="sansHeroDetails">
+					<h1 className="sansHeroTitle">
+						Welcome to
+						<br />
+						Sans Comic!
+					</h1>
+					<p className="sansHeroDescription">
+						Your one-stop shop to order all unreleased comic book titles like{' '}
+						<span className="sansEmphasis">
+							&nbsp;
+							{currentPromo?.title
+								? currentPromo.title
+								: 'Murderworld: Spider-Man (2023) #1'}{' '}
+							!!
+						</span>
 					</p>
-					<button className="btn btn-primary rounded-none">
-						<Link to="/promos">Click Here For More !</Link>
+					<button className="sansHeroButton">
+						<Link to="/comics">Click Here To Explore !</Link>
 					</button>
 				</div>
 			</div>
